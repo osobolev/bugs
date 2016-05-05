@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h2>Список замечаний</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Причина</th>
+        <th>Время создания</th>
+        <th>Статус</th>
+        <th>Приоритет</th>
+    </tr>
+    <#list bugs as bug>
+        <tr>
+            <td>${bug.id}</td>
+            <td>${bug.text}</td>
+            <td>${bug.createTime}</td>
+            <td>${bug.status}</td>
+            <td>${bug.priority}</td>
+        </tr>
+    </#list>
+</table>
+</body>
+</html>
