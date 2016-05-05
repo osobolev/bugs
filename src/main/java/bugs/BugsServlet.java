@@ -1,3 +1,8 @@
+package bugs;
+
+import common.Status;
+import common.TemplateUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BugListServlet extends HttpServlet {
+public class BugsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,6 +42,6 @@ public class BugListServlet extends HttpServlet {
             throw new ServletException(e);
         }
         data.put("bugs", bugs);
-        TemplateUtil.render("buglist.html", data, resp.getWriter());
+        TemplateUtil.render("bugs.html", data, resp.getWriter());
     }
 }

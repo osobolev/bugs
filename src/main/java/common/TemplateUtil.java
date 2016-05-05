@@ -1,3 +1,5 @@
+package common;
+
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.core.HTMLOutputFormat;
 import freemarker.template.Configuration;

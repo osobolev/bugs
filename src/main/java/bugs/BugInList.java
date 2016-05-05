@@ -1,3 +1,7 @@
+package bugs;
+
+import common.Status;
+
 import java.time.LocalDateTime;
 
 public class BugInList {

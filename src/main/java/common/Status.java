@@ -1,3 +1,5 @@
+package common;
+
 public enum Status {
     /**
      * Статус сразу после создания задачи
