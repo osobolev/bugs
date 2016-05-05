@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> data = new HashMap<>();
+        // SELECT ID, NAME, USER_ROLE, PASS_HASH FROM USERS WHERE LOGIN = ?
         // todo: проверяем, что пользователь с введенным логином и паролем
         // сущесутвует в БД
         // todo: если да, то вызываем код:
