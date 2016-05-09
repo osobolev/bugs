@@ -16,7 +16,8 @@ public class TemplateUtil {
     private static final Configuration cfg = new Configuration(Configuration.VERSION_2_3_24);
 
     static {
-        cfg.setTemplateLoader(new ClassTemplateLoader(TemplateUtil.class, ""));
+        cfg.setDefaultEncoding("UTF-8");
+        cfg.setTemplateLoader(new ClassTemplateLoader(TemplateUtil.class, "/"));
         cfg.setOutputFormat(HTMLOutputFormat.INSTANCE);
     }
 
