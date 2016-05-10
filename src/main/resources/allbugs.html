@@ -3,5 +3,29 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<button id="back" onclick="window.location='/bugs';"><- Мои замечания</button>
+<h2>Список замечаний</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Причина</th>
+        <th>Время создания</th>
+        <th>Статус</th>
+        <th>Приоритет</th>
+        <th>Автор (Роль)</th>
+        <th>Открыть</th>
+    </tr>
+    <#list fbugs as fbug>
+        <tr>
+            <td>${fbug.id}</td>
+            <td>${fbug.text}</td>
+            <td>${fbug.createTime}</td>
+            <td>${fbug.status}</td>
+            <td>${fbug.priority}</td>
+            <td>${fbug.name} (${fbug.role})</td>
+            <td><a href='/bug'>Перейти к описанию</a></td>
+        </tr>
+    </#list>
+</table>
 </body>
 </html>
