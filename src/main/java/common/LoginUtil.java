@@ -14,4 +14,9 @@ public class LoginUtil {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
     }
+
+    public static void clearUser(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        session.removeAttribute("user");
+    }
 }
