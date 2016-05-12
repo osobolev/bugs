@@ -3,5 +3,33 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<#include "header.html">
+<h2>Создание нового замечания</h2>
+<form action="newbug" method="post">
+    <table>
+        <tr>
+            <th>Краткое описание:</th>
+            <td><input name="name" size="60"></td>
+        </tr>
+        <tr>
+            <th>Полное описание:</th>
+            <td><textarea name="description" cols="60" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <th>Приоритет:</th>
+            <td>
+                <select name="priority">
+                    <option value="0">Низкий</option>
+                    <option value="1">Обычный</option>
+                    <option value="2">Высокий</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><input type="submit" value="Создать"></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

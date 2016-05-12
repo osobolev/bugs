@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<button id="back" onclick="window.location='/bugs';"><- Мои замечания</button>
+<#include "header.html">
 <h2>Список замечаний</h2>
 <table border="1">
     <tr>
@@ -23,7 +23,7 @@
             <td>${fbug.status}</td>
             <td>${fbug.priority}</td>
             <td>${fbug.name} (${fbug.role})</td>
-            <td><a href='/bug?id=${fbug.id}'>Перейти к описанию</a></td>
+            <td><a href='bug?id=${fbug.id}'>Перейти к описанию</a></td>
         </tr>
     </#list>
 </table>
