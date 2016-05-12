@@ -1,8 +1,6 @@
 package allbugs;
 
-import common.Role;
-import common.Status;
-import common.TemplateUtil;
+import common.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +19,27 @@ public class AllBugsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> data = new HashMap<>();
+
+        //header data. logged in user
+        User user = LoginUtil.getUser(req);
+        data.put("user", user.getName());
+        //header data. number of opened tasks
+        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "SELECT COUNT(ID) FROM BUGS WHERE AUTHOR_ID=? AND STATUS='OPENED'")) {
+                ps.setInt(1, user.getId());
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()){
+                        int num = rs.getInt(1);
+                        data.put("num", num);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new ServletException(e);
+        }
+        //end of header data
+
         ArrayList<BugInFullList> fbugs = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
             try (PreparedStatement ps = conn.prepareStatement(
