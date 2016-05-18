@@ -2,6 +2,7 @@ package common;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by inbor on 15.05.2016.
