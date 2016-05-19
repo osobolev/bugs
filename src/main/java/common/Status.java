@@ -20,5 +20,16 @@ public enum Status {
     /**
      * Статус после окончания тестирования, если баг исправлен
      */
-    FIXED
+    FIXED;
+
+    public String translate() {
+        switch (this) {
+            case OPENED: return "Открыт";
+            case ASSIGNED: return "Назначен";
+            case REOPENED: return "Переоткрыт";
+            case RESOLVED: return "Исправлен";
+            case FIXED: return "Закрыт";
+        }
+        return null;
+    }
 }
