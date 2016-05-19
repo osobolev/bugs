@@ -1,9 +1,6 @@
 package bugs;
 
-import common.LoginUtil;
-import common.Status;
-import common.TemplateUtil;
-import common.User;
+import common.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +24,7 @@ public class BugsServlet extends HttpServlet {
         User user = LoginUtil.getUser(req);
         data.put("user", user.getName());
         //header data. number of opened tasks
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT COUNT(ID) FROM BUGS WHERE AUTHOR_ID=? AND STATUS='OPENED'")) {
                 ps.setInt(1, user.getId());
@@ -44,7 +41,7 @@ public class BugsServlet extends HttpServlet {
         //end of header data
 
         ArrayList<BugInList> bugs = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT ID, TEXT, CREATE_TIME, STATUS, PRIORITY FROM BUGS WHERE AUTHOR_ID=? ORDER BY ID DESC")) {
                 ps.setInt(1, user.getId());

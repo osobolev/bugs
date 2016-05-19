@@ -1,8 +1,7 @@
 package newbug;
 
-import bugs.BugInList;
+import common.DB;
 import common.LoginUtil;
-import common.Status;
 import common.TemplateUtil;
 import common.User;
 
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +25,7 @@ public class NewBugServlet extends HttpServlet {
         User user = LoginUtil.getUser(req);
         data.put("user", user.getName());
         //header data. number of opened tasks
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT COUNT(ID) FROM BUGS WHERE AUTHOR_ID=? AND STATUS='OPENED'")) {
                 ps.setInt(1, user.getId());
@@ -58,7 +55,7 @@ public class NewBugServlet extends HttpServlet {
             resp.sendError(403);
             return;
         }
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "INSERT INTO BUGS (TEXT, DESCRIPTION, AUTHOR_ID, CREATE_TIME, STATUS, PRIORITY)" +
                             "VALUES (?, ?, ?, CURRENT_TIMESTAMP, 'OPENED', ?)")) {

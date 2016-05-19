@@ -24,7 +24,7 @@ public class AllBugsServlet extends HttpServlet {
         User user = LoginUtil.getUser(req);
         data.put("user", user.getName());
         //header data. number of opened tasks
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT COUNT(ID) FROM BUGS WHERE AUTHOR_ID=? AND STATUS='OPENED'")) {
                 ps.setInt(1, user.getId());
@@ -41,7 +41,7 @@ public class AllBugsServlet extends HttpServlet {
         //end of header data
 
         ArrayList<BugInFullList> fbugs = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT ID, TEXT, CREATE_TIME, STATUS, PRIORITY, AUTHOR_ID FROM BUGS ORDER BY ID DESC;")) {
                 try (ResultSet rs = ps.executeQuery()) {

@@ -1,9 +1,6 @@
 package login;
 
-import common.LoginUtil;
-import common.Role;
-import common.TemplateUtil;
-import common.User;
+import common.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT ID, NAME, USER_ROLE, PASS_HASH FROM USERS WHERE LOGIN = ?")) {
                 ps.setString(1, login);

@@ -1,5 +1,6 @@
 package bug;
 
+import common.DB;
 import common.LoginUtil;
 import common.TemplateUtil;
 import common.User;
@@ -26,7 +27,7 @@ public class BugServlet extends HttpServlet {
         User user = LoginUtil.getUser(req);
         data.put("user", user.getName());
         //header data. number of opened tasks
-        try (Connection conn = DriverManager.getConnection("jdbc:h2:~/bugs")) {
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT COUNT(ID) FROM BUGS WHERE AUTHOR_ID=? AND STATUS='OPENED'")) {
                 ps.setInt(1, user.getId());

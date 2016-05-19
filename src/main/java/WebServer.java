@@ -1,10 +1,10 @@
 import allbugs.AllBugsServlet;
 import bug.BugServlet;
 import bugs.BugsServlet;
+import common.MainServlet;
 import login.LoginServlet;
 import login.LogoutServlet;
 import newbug.NewBugServlet;
-import common.MainServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
