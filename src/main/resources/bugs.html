@@ -13,6 +13,7 @@
         <th>Время создания</th>
         <th>Статус</th>
         <th>Приоритет</th>
+        <th>Открыть</th>
     </tr>
     <#list bugs as bug>
         <tr>
@@ -21,6 +22,7 @@
             <td>${bug.createTime}</td>
             <td>${bug.status}</td>
             <td>${bug.priority}</td>
+            <td><a href='bug?id=${bug.id}'>Перейти к описанию</a></td>
         </tr>
     </#list>
 </table>

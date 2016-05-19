@@ -1,9 +1,7 @@
 package bug;
 
-import common.DB;
-import common.LoginUtil;
-import common.TemplateUtil;
-import common.User;
+import bugs.BugInList;
+import common.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +42,23 @@ public class BugServlet extends HttpServlet {
         }
         //end of header data
 
-        data.put("fullBug", new BugDetails(bugId, "???"));
+        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "SELECT DESCRIPTION FROM BUGS WHERE ID=?")) {
+                ps.setInt(1, bugId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        String text = rs.getString(1);
+                        BugDetails bug = new BugDetails(
+                                bugId, text
+                        );
+                        data.put("fullBug", bug);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new ServletException(e);
+        }
         TemplateUtil.render("bug.html", data, resp.getWriter());
     }
 }

@@ -3,6 +3,7 @@ package bugs;
 import common.Status;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class BugInList {
 
@@ -28,12 +29,12 @@ public class BugInList {
         return text;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public String getCreateTime() {
+        return createTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm"));
     }
 
-    public Status getStatus() {
-        return status;
+    public String getStatus() {
+        return status.translate();
     }
 
     public int getPriority() {
