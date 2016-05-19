@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LoginServlet extends HttpServlet {
 
@@ -29,18 +30,20 @@ public class LoginServlet extends HttpServlet {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT ID, NAME, USER_ROLE, PASS_HASH FROM USERS WHERE LOGIN = ?")) {
                 ps.setString(1, login);
-                //ps.setString(2, password);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         int id = rs.getInt(1);
                         String name = rs.getString(2);
                         String roleStr = rs.getString(3);
                         String passHash = rs.getString(4);
-                        Role role = Role.valueOf(roleStr);
-                        LoginUtil.setUser(req, new User(id, role, name));
-                        resp.sendRedirect("bugs");
-                    } else {
-                        resp.sendError(403);
+                        // todo: сравнить MD5(password) и passHash
+                        if (Objects.equals(passHash, GetMD5.crypt(password))) {
+                            Role role = Role.valueOf(roleStr);
+                            LoginUtil.setUser(req, new User(id, role, name));
+                            resp.sendRedirect("bugs");
+                        } else {
+                            resp.sendError(403);
+                        }
                     }
                 }
 

@@ -14,8 +14,11 @@ import java.util.Map;
 public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
-        Map<String, Object> data = new HashMap<>();
-        TemplateUtil.render("welcome.html", data, resp.getWriter());
+        User user = LoginUtil.getUser(req);
+        if (user != null) {
+            resp.sendRedirect("bugs");
+        } else {
+            resp.sendRedirect("login");
+        }
     }
 }
