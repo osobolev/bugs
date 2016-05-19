@@ -25,25 +25,29 @@ public class BugServlet extends HttpServlet {
 
         //header data. logged in user
         User user = LoginUtil.getUser(req);
-        data.put("user", user.getName());
+        if (user == null) {
+            resp.sendRedirect("login");
+            return;
+        }
+        data.put("user", user == null ? "" : user.getName());
         //header data. number of opened tasks
         try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
             try (PreparedStatement ps = conn.prepareStatement(
-                    "SELECT COUNT(ID) FROM BUGS WHERE AUTHOR_ID=? AND STATUS='OPENED'")) {
-                ps.setInt(1, user.getId());
+                    "SELECT ID, TEXT, DESCRIPTION, AUTHOR_ID, CREATE_TIME, STATUS, ASSIGNED_ID, PRIORITY FROM BUGS WHERE ID = ?")) {
+                ps.setInt(1, bugId);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()){
-                        int num = rs.getInt(1);
-                        data.put("num", num);
+                        String text = rs.getString("TEXT");
+                        String description = rs.getString("DESCRIPTION");
+                        data.put("fullBug", new BugDetails(bugId, text, description));
+                        TemplateUtil.render("bug.html", data, resp.getWriter());
                     }
                 }
             }
         } catch (SQLException e) {
             throw new ServletException(e);
         }
+        resp.sendError(404);
         //end of header data
-
-        data.put("fullBug", new BugDetails(bugId, "???"));
-        TemplateUtil.render("bug.html", data, resp.getWriter());
     }
 }

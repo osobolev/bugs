@@ -5,9 +5,31 @@
 <body>
 <#include "header.html">
 <h2>Редактирование замечания</h2>
-<form>
-    <p>Номер: ${fullBug.id}</p>
-    <p>Описание: ${fullBug.description}</p>
-</form>
+    <form action="newbug" method="post">
+        <table>
+            <tr>
+                <th>Краткое описание:</th>
+                <td>${fullBug.text}</td>
+            </tr>
+            <tr>
+                <th>Полное описание:</th>
+                <td>${fullBug.description}</td>
+            </tr>
+            <tr>
+                <th>Приоритет:</th>
+                <td>
+                    <select name="priority">
+                        <option value="0">Низкий</option>
+                        <option value="1">Обычный</option>
+                        <option value="2">Высокий</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="Редактировать"></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>

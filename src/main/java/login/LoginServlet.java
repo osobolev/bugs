@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             try (PreparedStatement ps = conn.prepareStatement(
                     "SELECT ID, NAME, USER_ROLE, PASS_HASH FROM USERS WHERE LOGIN = ?")) {
                 ps.setString(1, login);
-                ps.setString(2, password);
+                //ps.setString(2, password);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         int id = rs.getInt(1);
