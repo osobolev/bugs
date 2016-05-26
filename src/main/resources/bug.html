@@ -15,14 +15,15 @@
 <body style="background-color: #00FFFF">
 
 <form method="post" action="bug">
+    <input type="hidden" name="id" value="${fullBug.id}"/>
     <div>
         <p class="auto-style1" style="width: 511px; height: 28px">Замечание</p>
-        <p><label id="Label1">Номер </label><label id="Label2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Приоритет </label>
-            <select name="priority" disabled="disabled">
-                <option value="0">Низкий</option>
-                <option value="1">Обычний</option>
-                <option value="2">Высокий</option>
-            </select>
+        <p><label id="Label1">Номер ${fullBug.id}</label><label id="Label2">&nbsp;&nbsp;&nbsp;Статус ${fullBug.status} </label>
+            <!--<select name="priority" disabled="disabled">-->
+                <!--<option value="0">Низкий</option>-->
+                <!--<option value="1">Обычний</option>-->
+                <!--<option value="2">Высокий</option>-->
+            <!--</select>-->
         </p>
         <p>Краткое описание</p>
         <p>
@@ -44,9 +45,9 @@
         <label id="lbugdate1">Дата закрытия замечания&nbsp;&nbsp; </label><label id="closedate">25.05.2016г.</label>
     </div>
 
-
-    <input name="Submitreg" type="submit" value="Отработано" />
-    <input name="Submitcansel" type="submit" value="Отказ" />
+    <#list buttons as button>
+    <input name="${button.name}" type="submit" value="${button.displayText}" />
+    </#list>
 </form>
 
 </body>
