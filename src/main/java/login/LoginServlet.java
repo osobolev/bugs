@@ -18,6 +18,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
         Map<String, Object> data = new HashMap<>();
+        data.put("defaultLogin", "");
         TemplateUtil.render("login.html", data, resp.getWriter());
     }
 
@@ -36,19 +37,19 @@ public class LoginServlet extends HttpServlet {
                         String name = rs.getString(2);
                         String roleStr = rs.getString(3);
                         String passHash = rs.getString(4);
-                        // todo: сравнить MD5(password) и passHash
-                        if (Objects.equals(passHash, GetMD5.crypt(password))) {
+                        if (Objects.equals(passHash, GetSHA256.crypt(password))) {
                             Role role = Role.valueOf(roleStr);
                             LoginUtil.setUser(req, new User(id, role, name));
                             resp.sendRedirect("bugs");
-                        } else {
-                            resp.sendError(403);
+                            return;
                         }
                     }
                 }
-
-
             }
+            Map<String, Object> data = new HashMap<>();
+            data.put("defaultLogin", login);
+            data.put("error", "Неправильный логин или пароль");
+            TemplateUtil.render("login.html", data, resp.getWriter());
         } catch (SQLException e) {
             throw new ServletException(e);
         }

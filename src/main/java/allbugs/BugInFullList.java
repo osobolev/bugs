@@ -1,5 +1,6 @@
 package allbugs;
 
+import common.PriorityUtil;
 import common.Role;
 import common.Status;
 
@@ -42,10 +43,9 @@ public class BugInFullList {
         return status.translate();
     }
 
-    public int getPriority() {
-        return priority;
+    public String getPriority() {
+        return PriorityUtil.priorityToString(priority);
     }
-
 
     public String getName() {
         return name;
