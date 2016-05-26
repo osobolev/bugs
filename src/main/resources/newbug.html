@@ -1,35 +1,53 @@
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
+	<meta content="ru" http-equiv="Content-Language" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>Новое замечание</title>
+	<style type="text/css">
+.auto-style1 {
+	font-size: x-large;
+}
+</style>
 </head>
-<body>
-<#include "header.html">
-<h2>Создание нового замечания</h2>
-<form action="newbug" method="post">
-    <table>
-        <tr>
-            <th>Краткое описание:</th>
-            <td><input name="name" size="60"></td>
-        </tr>
-        <tr>
-            <th>Полное описание:</th>
-            <td><textarea name="description" cols="60" rows="10"></textarea></td>
-        </tr>
-        <tr>
-            <th>Приоритет:</th>
-            <td>
-                <select name="priority">
-                    <option value="0">Низкий</option>
-                    <option value="1">Обычный</option>
-                    <option value="2">Высокий</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th></th>
-            <td><input type="submit" value="Создать"></td>
-        </tr>
-    </table>
+
+<body style="background-color: #00FFFF">
+
+<form method="post" action="newbug">
+<div>
+	<p class="auto-style1" style="width: 511px; height: 28px">Новое замечание</p>
+	<p><label id="Label1">Номер </label><label id="Label2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Приоритет </label>
+		<select name="priority">
+			<option value="0">Низкий</option>
+			<option value="1">Обычний</option>
+			<option value="2">Высокий</option>
+		</select>
+	</p>
+	<p>Краткое описание </p>
+	<input name="name" style="width: 499px" type="text" />
+
+	<p>Описание замечания</p>
+	<textarea name="description" style="width: 502px; height: 110px"></textarea>
+	<p>
+		<label id="ltester">Составил &nbsp;&nbsp; </label><label id="tester">Иванов</label>
+		<label id="lbugdate">&nbsp;&nbsp;&nbsp;&nbsp; Дата замечания&nbsp;&nbsp; </label><label id="bugdate">25.05.2016г.</label>
+	</p>
+
+	<p>Ответ на замечание</p>
+	<textarea name="answer" style="width: 502px; height: 110px" cols="20" rows="1"></textarea>
+	<p>
+		<label id="ltester0">Разработчик &nbsp;&nbsp; </label><label id="developer">Петров</label>
+		<label id="lbugdate0">&nbsp;&nbsp;&nbsp;&nbsp; Дата ответа&nbsp;&nbsp; </label><label id="answerdate">25.05.2016г.</label>
+	</p>
+	<label id="lbugdate1">Дата закрытия замечания&nbsp;&nbsp; </label><label id="closedate">25.05.2016г.</label>
+</div>
+
+
+	<input name="Submitreg" type="submit" value="Зарегистрировать" />
+	<input name="Submitcansel" type="submit" value="Отказ" />
 </form>
+
 </body>
+
 </html>

@@ -47,27 +47,34 @@ public class NewBugServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
-        String name = req.getParameter("name");
-        String description = req.getParameter("description");
-        String priorityStr = req.getParameter("priority");
-        User user = LoginUtil.getUser(req);
-        if (user == null) {
-            resp.sendError(403);
-            return;
-        }
-        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
-            try (PreparedStatement ps = conn.prepareStatement(
-                    "INSERT INTO BUGS (TEXT, DESCRIPTION, AUTHOR_ID, CREATE_TIME, STATUS, PRIORITY)" +
-                            "VALUES (?, ?, ?, CURRENT_TIMESTAMP, 'OPENED', ?)")) {
-                ps.setString(1, name);
-                ps.setString(2, description);
-                ps.setInt(3, user.getId());
-                ps.setInt(4, Integer.parseInt(priorityStr));
-                ps.execute();
+
+        String submitreg = req.getParameter("Submitreg");
+//        String submitcansel = req.getParameter("Submitcansel");
+
+        if (submitreg != null) {
+            String name = req.getParameter("name");
+            String description = req.getParameter("description");
+            String priorityStr = req.getParameter("priority");
+            User user = LoginUtil.getUser(req);
+            if (user == null) {
+                resp.sendError(403);
+                return;
             }
-        } catch (SQLException e) {
-            throw new ServletException(e);
+
+            try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
+                try (PreparedStatement ps = conn.prepareStatement(
+                        "INSERT INTO BUGS (TEXT, DESCRIPTION, AUTHOR_ID, CREATE_TIME, STATUS, PRIORITY)" +
+                                "VALUES (?, ?, ?, CURRENT_TIMESTAMP, 'OPENED', ?)")) {
+                    ps.setString(1, name);
+                    ps.setString(2, description);
+                    ps.setInt(3, user.getId());
+                    ps.setInt(4, Integer.parseInt(priorityStr));
+                    ps.execute();
+                }
+            } catch (SQLException e) {
+                throw new ServletException(e);
+            }
         }
-        resp.sendRedirect("bugs");
+        resp.sendRedirect("/bugs");
     }
 }
