@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by inbor on 15.05.2016.
  */
-public class GetMD5 {
+public class GetSHA256 {
 
 
     private static MessageDigest digester;
@@ -16,7 +16,7 @@ public class GetMD5 {
 
     static {
         try {
-            digester = MessageDigest.getInstance("MD5");
+            digester = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -39,5 +39,10 @@ public class GetMD5 {
             }
         }
         return hexString.toString();
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String crypt = crypt("1234");
+        System.out.println(crypt);
     }
 }

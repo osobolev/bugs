@@ -5,11 +5,14 @@
 <body>
 <h2>Вход</h2>
 
+<#if error??>
+<h2 style="color: red;">${error}</h2>
+</#if>
 <form action="login" method="post">
     <table>
         <tr>
             <th>Логин</th>
-            <td><input name="login"></td>
+            <td><input name="login" value="${defaultLogin}"></td>
         </tr>
         <tr>
             <th>Пароль</th>
