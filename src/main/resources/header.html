@@ -1,6 +1,9 @@
-<p id="greet">Здравствуйте, ${user}. </p>
-<p id="choice"><a href="bugs">Мои замечания</a> | <a href="allbugs">Все замечания</a></p>
-
-<form action="logout" method="post">
-    <input type="submit" value="Выход">
+<form action="logout" method="post" style="margin: 0; padding: 0;">
+    <div class="header">
+        <span class="greet">Здравствуйте, ${user}.</span>
+        <input type="submit" value="Выход">
+    </div>
 </form>
+<div class="menu">
+    <a href="bugs">Мои замечания</a> | <a href="allbugs">Все замечания</a> | <a href="newbug">Новое замечание</a>
+</div>

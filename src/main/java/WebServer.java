@@ -6,10 +6,7 @@ import login.LoginServlet;
 import login.LogoutServlet;
 import newbug.NewBugServlet;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.util.resource.Resource;
 
 public class WebServer {
 
@@ -24,6 +21,7 @@ public class WebServer {
         ctx.addServlet(AllBugsServlet.class, "/allbugs");
         ctx.addServlet(BugServlet.class, "/bug");
         ctx.addServlet(NewBugServlet.class, "/newbug");
+        ctx.addServlet(StaticServlet.class, "/static/*");
         server.start();
     }
 }
