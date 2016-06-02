@@ -18,26 +18,9 @@ public class BugsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> data = new HashMap<>();
-
-        //header data. logged in user
-        User user = LoginUtil.getUser(req);
-        data.put("user", user.getName());
-        //header data. number of opened tasks
-        try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
-            try (PreparedStatement ps = conn.prepareStatement(
-                    "SELECT COUNT(ID) FROM BUGS WHERE AUTHOR_ID=? AND STATUS='OPENED'")) {
-                ps.setInt(1, user.getId());
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()){
-                        int num = rs.getInt(1);
-                        data.put("num", num);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            throw new ServletException(e);
-        }
-        //end of header data
+        User user = HeaderUtil.prepareHeader(req, resp, data);
+        if (user == null)
+            return;
 
         ArrayList<BugInList> bugs = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {

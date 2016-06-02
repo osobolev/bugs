@@ -44,6 +44,25 @@
     </#list>
 </form>
 
+<table class="borders">
+    <tr>
+        <th>Время</th>
+        <th>Старый статус</th>
+        <th>Новый статус</th>
+        <th>Пользователь</th>
+        <th>Комментарий</th>
+    </tr>
+    <#list history as h>
+        <tr>
+            <td>${h.date}</td>
+            <td>${h.oldStatus}</td>
+            <td>${h.newStatus}</td>
+            <td>${h.user}</td>
+            <td>${h.comment}</td>
+        </tr>
+    </#list>
+</table>
+
 </body>
 
 </html>
