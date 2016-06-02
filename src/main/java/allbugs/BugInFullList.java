@@ -51,7 +51,7 @@ public class BugInFullList {
         return name;
     }
 
-    public Role getRole() {
-        return role;
+    public String getRole() {
+        return role.translate();
     }
 }
