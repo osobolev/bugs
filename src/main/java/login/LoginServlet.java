@@ -16,15 +16,13 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
         Map<String, Object> data = new HashMap<>();
         data.put("defaultLogin", "");
-        TemplateUtil.render("login.html", data, resp.getWriter());
+        TemplateUtil.render("login.html", data, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         try (Connection conn = DriverManager.getConnection(DB.DB_NAME)) {
@@ -49,7 +47,7 @@ public class LoginServlet extends HttpServlet {
             Map<String, Object> data = new HashMap<>();
             data.put("defaultLogin", login);
             data.put("error", "Неправильный логин или пароль");
-            TemplateUtil.render("login.html", data, resp.getWriter());
+            TemplateUtil.render("login.html", data, resp);
         } catch (SQLException e) {
             throw new ServletException(e);
         }

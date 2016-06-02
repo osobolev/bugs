@@ -18,7 +18,6 @@ public class NewBugServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
         Map<String, Object> data = new HashMap<>();
 
         //header data. logged in user
@@ -41,13 +40,11 @@ public class NewBugServlet extends HttpServlet {
         }
         //end of header data
 
-        TemplateUtil.render("newbug.html", data, resp.getWriter());
+        TemplateUtil.render("newbug.html", data, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
-
         String submitreg = req.getParameter("Submitreg");
 //        String submitcansel = req.getParameter("Submitcansel");
 

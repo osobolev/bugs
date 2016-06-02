@@ -17,7 +17,6 @@ public class BugsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setCharacterEncoding("UTF-8");
         Map<String, Object> data = new HashMap<>();
 
         //header data. logged in user
@@ -63,6 +62,6 @@ public class BugsServlet extends HttpServlet {
             throw new ServletException(e);
         }
         data.put("bugs", bugs);
-        TemplateUtil.render("bugs.html", data, resp.getWriter());
+        TemplateUtil.render("bugs.html", data, resp);
     }
 }

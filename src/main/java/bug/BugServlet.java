@@ -24,7 +24,6 @@ public class BugServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String bugIdStr = req.getParameter("id");
         int bugId = Integer.parseInt(bugIdStr);
-        resp.setCharacterEncoding("UTF-8");
         Map<String, Object> data = new HashMap<>();
 
         //header data. logged in user
@@ -72,7 +71,7 @@ public class BugServlet extends HttpServlet {
                                 break;
                         }
                         data.put("buttons", buttons);
-                        TemplateUtil.render("bug.html", data, resp.getWriter());
+                        TemplateUtil.render("bug.html", data, resp);
                         return;
                     }
                 }
