@@ -50,9 +50,9 @@ public class BugsServlet extends HttpServlet {
                         String text = rs.getString(2);
                         LocalDateTime createTime = rs.getTimestamp(3).toLocalDateTime();
                         Status status = Status.valueOf(rs.getString(4));
-                        int priority = rs.getInt(5);
+                        int priorityid = rs.getInt(5);
                         BugInList bug = new BugInList(
-                            id, text, createTime, status, priority
+                            id, text, createTime, status, priorityid
                         );
                         bugs.add(bug);
                     }

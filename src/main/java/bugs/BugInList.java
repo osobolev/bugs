@@ -1,5 +1,6 @@
 package bugs;
 
+import common.PriorityUtil;
 import common.Status;
 
 import java.time.LocalDateTime;
@@ -37,7 +38,7 @@ public class BugInList {
         return status.translate();
     }
 
-    public int getPriority() {
-        return priority;
+    public String getPriority() {
+        return PriorityUtil.priorityToString(priority);
     }
 }
